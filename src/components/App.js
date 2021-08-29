@@ -83,6 +83,7 @@ class App extends Component {
 
     // Load smart contract
     const networkId = await web3.eth.net.getId()
+    //console.log(networkId)
     const networkData = MemoryToken.networks[networkId]
     if(networkData) {
       const abi = MemoryToken.abi
@@ -187,7 +188,7 @@ class App extends Component {
             rel="noopener noreferrer"
           >
           <img src={brain} width="30" height="30" className="d-inline-block align-top" alt="" />
-          &nbsp; Memory Tokens
+          &nbsp; NFT Tokens
           </a>
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
