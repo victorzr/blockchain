@@ -6,3 +6,9 @@
   border-radius: 50%;
   display: inline-block;
 }
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+}

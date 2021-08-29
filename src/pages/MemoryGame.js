@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Web3 from 'web3'
-//import './styles/App.css';
-import MemoryToken from '../abis/MemoryToken.json'
-import brain from '../brain.png'
+import { loadWeb3, loadBlockchainData } from '../helpers/helpers';
+
+import '../components/styles/App.css'
 
 const CARD_ARRAY = [
   {
@@ -56,6 +55,24 @@ const CARD_ARRAY = [
 ]
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      tokenURIs: [],
+      cardArray: [],
+      cardsChosen: [],
+      cardsChosenId: [],
+      cardsWon: []
+    }
+  }
+
+  async componentWillMount() {
+    await loadWeb3()
+    let state = await loadBlockchainData()
+    this.setState({ ...state, cardArray: CARD_ARRAY.sort(() => 0.5 - Math.random()) })
+    console.log(this.state)
+  }
+
   chooseImage = (cardId) => {
     cardId = cardId.toString()
     if(this.state.cardsWon.includes(cardId)) {
@@ -110,20 +127,6 @@ class App extends Component {
     })
     if (this.state.cardsWon.length === CARD_ARRAY.length) {
       alert('Congratulations! You found them all!')
-    }
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      account: '0x0',
-      token: null,
-      totalSupply: 0,
-      tokenURIs: [],
-      cardArray: [],
-      cardsChosen: [],
-      cardsChosenId: [],
-      cardsWon: []
     }
   }
 

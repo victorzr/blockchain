@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 import brain from '../brain.png'
-import './styles/App.css'
 
 class Navbar extends React.Component {
     constructor(props) {

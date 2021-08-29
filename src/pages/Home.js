@@ -14,33 +14,32 @@ export default class Home extends Component {
                     </Link>
                 </li>
                 <li>
-                    <a href="./2. whac-a-mole/index.html">
+                    <Link to="/Whacamole">
                         Whac-A-Mole
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="./4. Nokia3310-Snake/index.html">
+                    <Link to="/Snake">
                         Snake
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="./5. space-invaders/index.html">
+                    <Link to="/Invaders">
                         Space Invaders
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="./6. Frogger/index.html">
+                    <Link to="/Frogger">
                         Frogger
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="./7. Tetris/index.html">
+                    <Link to="/Tetris/">
                         Tetris
-                    </a>
+                    </Link>
                 </li>
             </ol>
-            <h3>Total trophies earned: <span id="trophies"></span></h3>
-            <h3>Total wins: <span id="wins"></span></h3>
+            <h3>Total trophies earned: 0</h3>
         </React.Fragment>
     );
   }
