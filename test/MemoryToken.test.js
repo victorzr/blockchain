@@ -1,14 +1,14 @@
-const MemoryToken = artifacts.require('./MemoryToken.sol')
+const MyToken = artifacts.require('./HogToken.sol')
 
 require('chai')
   .use(require('chai-as-promised'))
   .should()
 
-contract('Memory Token', (accounts) => {
+contract('Hog Token', (accounts) => {
   let token
 
   before(async () => {
-    token = await MemoryToken.deployed()
+    token = await MyToken.deployed()
   })
 
   describe('deployment', async () => {
@@ -22,12 +22,12 @@ contract('Memory Token', (accounts) => {
 
     it('has a name', async () => {
       const name = await token.name()
-      assert.equal(name, 'Memory Token')
+      assert.equal(name, 'Hog Token')
     })
 
     it('has a symbol', async () => {
       const symbol = await token.symbol()
-      assert.equal(symbol, 'MEMORY')
+      assert.equal(symbol, 'HOG')
     })
   })
 
