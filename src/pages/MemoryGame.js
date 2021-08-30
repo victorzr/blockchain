@@ -107,16 +107,8 @@ class App extends Component {
       alert('You have clicked the same image!')
     } else if (this.state.cardsChosen[0] === this.state.cardsChosen[1]) {
       alert('You found a match')
-      this.state.token.methods.mint(
-        this.state.account,
-        window.location.origin + CARD_ARRAY[optionOneId].img.toString()
-      )
-      .send({ from: this.state.account })
-      .on('transactionHash', (hash) => {
-        this.setState({
-          cardsWon: [...this.state.cardsWon, optionOneId, optionTwoId],
-          tokenURIs: [...this.state.tokenURIs, CARD_ARRAY[optionOneId].img]
-        })
+      this.setState({
+        cardsWon: [...this.state.cardsWon, optionOneId, optionTwoId],
       })
     } else {
       alert('Sorry, try again')
@@ -126,7 +118,18 @@ class App extends Component {
       cardsChosenId: []
     })
     if (this.state.cardsWon.length === CARD_ARRAY.length) {
-      alert('Congratulations! You found them all!')
+      let tokenURI = "https://lh3.googleusercontent.com/EGjt3a_oaLvxLRHr9KP-BTW6iZEjW7d3oID5k2kD77jTn2ChMiXJdno_OTZC0AHjsGlz-1UMqtY4Ec57an0j8-wESWT46Mq-PopTujU=s0"
+      this.state.token.methods.mint(
+        this.state.account,
+        tokenURI
+        )
+        .send({ from: this.state.account })
+        .on('transactionHash', (hash) => {
+          this.setState({
+            tokenURIs: [...this.state.tokenURIs, tokenURI]
+          })
+        })
+      alert('Congratulations! You found them all! You\'ve earned a trophy which can be seen on the main page')
     }
   }
 
@@ -157,25 +160,6 @@ class App extends Component {
                     )
                   })}
 
-
-                </div>
-
-                <div>
-
-                  <h5>Tokens Collected:<span id="result">&nbsp;{this.state.tokenURIs.length}</span></h5>
-
-                  <div className="grid mb-4" >
-
-                    { this.state.tokenURIs.map((tokenURI, key) => {
-                      return(
-                        <img
-                          key={key}
-                          src={tokenURI}
-                        />
-                      )
-                    })}
-
-                  </div>
 
                 </div>
 

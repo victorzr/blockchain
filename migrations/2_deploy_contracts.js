@@ -1,5 +1,5 @@
-const MemoryToken = artifacts.require("MemoryToken");
+const MyToken = artifacts.require("HogToken");
 
 module.exports = function(deployer) {
-  deployer.deploy(MemoryToken);
+  deployer.deploy(MyToken);
 };

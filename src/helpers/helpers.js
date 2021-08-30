@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import MemoryToken from '../abis/MemoryToken.json'
+import MyToken from '../abis/HogToken.json'
 
 export async function loadWeb3() {
     if (window.ethereum) {
@@ -25,9 +25,9 @@ export async function loadBlockchainData() {
     // Load smart contract
     const networkId = await web3.eth.net.getId()
     //console.log(networkId)
-    const networkData = MemoryToken.networks[networkId]
+    const networkData = MyToken.networks[networkId]
     if (networkData) {
-        const abi = MemoryToken.abi
+        const abi = MyToken.abi
         const address = networkData.address
         token = new web3.eth.Contract(abi, address)
         //this.setState({ token })
