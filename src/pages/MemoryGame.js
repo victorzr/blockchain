@@ -58,7 +58,6 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tokenURIs: [],
       cardArray: [],
       cardsChosen: [],
       cardsChosenId: [],
@@ -70,7 +69,6 @@ class App extends Component {
     await loadWeb3()
     let state = await loadBlockchainData()
     this.setState({ ...state, cardArray: CARD_ARRAY.sort(() => 0.5 - Math.random()) })
-    console.log(this.state)
   }
 
   chooseImage = (cardId) => {
@@ -118,17 +116,15 @@ class App extends Component {
       cardsChosenId: []
     })
     if (this.state.cardsWon.length === CARD_ARRAY.length) {
-      let tokenURI = "https://lh3.googleusercontent.com/EGjt3a_oaLvxLRHr9KP-BTW6iZEjW7d3oID5k2kD77jTn2ChMiXJdno_OTZC0AHjsGlz-1UMqtY4Ec57an0j8-wESWT46Mq-PopTujU=s0"
+      //Trophy image
+      let tokenURI = "https://w7.pngwing.com/pngs/87/903/png-transparent-match-memory-game-uber-genius-mind-games-pro-mind-games-with-arrows-mind-games-thumbnail.png"
       this.state.token.methods.mint(
         this.state.account,
         tokenURI
         )
         .send({ from: this.state.account })
-        .on('transactionHash', (hash) => {
-          this.setState({
-            tokenURIs: [...this.state.tokenURIs, tokenURI]
-          })
-        })
+        // .on('transactionHash', (hash) => {
+        // })
       alert('Congratulations! You found them all! You\'ve earned a trophy which can be seen on the main page')
     }
   }

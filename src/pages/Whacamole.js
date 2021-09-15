@@ -1,4 +1,5 @@
 import React from 'react'
+import { loadWeb3, loadBlockchainData } from '../helpers/helpers';
 
 import './Whacamole/styles.css'
 
@@ -7,69 +8,88 @@ class Whacamole extends React.Component {
         super(props)
     }
 
-    // componentWillMount() {
-    //     console.log(this.state)
+    async componentDidMount() {
+        await loadWeb3()
+        let blockchainData = await loadBlockchainData()
+        this.state = {
+            ...blockchainData,
+            squares: document.querySelectorAll('.square'),
+            mole: document.querySelector('.mole'),
+            timeLeft: document.querySelector('#time-left'),
+            score: document.querySelector('#score'),
+            result: 0,
+            hitPosition: null,
+            currentTime: 30,
+            timerId: null,
+            winningScore: 30
+        }
 
-    //     this.state.squares.forEach(square => {
-    //         square.addEventListener('mousedown', () => {
-    //           if (square.id == this.state.hitPosition) {
-    //             this.state.result++
-    //             this.state.score.textContent = this.state.result
-    //             this.state.hitPosition = null
-    //           }
-    //         })
-    //       })
+        this.state.squares.forEach(square => {
+            square.addEventListener('mousedown', () => {
+              if (square.id == this.state.hitPosition) {
+                square.classList.add('hit')
+                this.state.result++
+                this.state.score.textContent = this.state.result
+                this.state.hitPosition = null
+              }
+            })
+          })
           
-    //     this.state.countDownTimerId = this.setInterval(this.state.countDown, 1000)
-    //     this.moveMole()
-    // }
+        this.state.countDownTimerId = setInterval(this.countDown, 1000)
+        this.moveMole()
+    }
+    
+    randomSquare = () => {
+      this.state.squares.forEach(square => {
+        square.classList.remove('mole')
+        square.classList.remove('hit')
+      })
+    
+      let randomSquare = this.state.squares[Math.floor(Math.random() * 9)]
+      randomSquare.classList.add('mole')
+    
+      this.state.hitPosition = randomSquare.id
+    }
+    
+    moveMole = () => {
+        this.state.timerId = setInterval(this.randomSquare, 500)
+    }
+    
+    countDown = () => {
+        this.state.currentTime--
+        this.state.timeLeft.textContent = this.state.currentTime
+    
+        if (this.state.currentTime == 0) {
+            clearInterval(this.state.countDownTimerId)
+            clearInterval(this.state.timerId)
+            this.gameOver()
+        }
+    
+    }
 
-    // componentDidMount() {
-    //     this.setState = {
-    //         squares: document.querySelectorAll('.square'),
-    //         mole: document.querySelector('.mole'),
-    //         timeLeft: document.querySelector('#time-left'),
-    //         score: document.querySelector('#score'),
-    //         result: 0,
-    //         hitPosition: null,
-    //         currentTime: 60,
-    //         timerId: null
-    //     }
-    // }
-    
-    // randomSquare = () => {
-    //   this.state.squares.forEach(square => {
-    //     square.classList.remove('mole')
-    //   })
-    
-    //   let randomSquare = this.state.squares[Math.floor(Math.random() * 9)]
-    //   randomSquare.classList.add('mole')
-    
-    //   this.state.hitPosition = randomSquare.id
-    // }
-    
-    // moveMole = () => {
-    //     this.state.timerId = setInterval(this.randomSquare, 500)
-    // }
-    
-    // countDown = () => {
-    //     this.state.currentTime--
-    //     this.state.timeLeft.textContent = this.state.currentTime
-    
-    //     if (this.state.currentTime == 0) {
-    //         clearInterval(this.state.countDownTimerId)
-    //         clearInterval(this.state.timerId)
-    //         alert('GAME OVER! Your final score is ' + this.state.result)
-    //     }
-    
-    // }
+    gameOver = () => {
+        if(this.state.result < this.state.winningScore) {
+            alert("We're sorry! You've lost the game")
+        }
+        else {
+            //Trophy image
+            let tokenURI = "https://e7.pngegg.com/pngimages/307/524/png-clipart-whack-a-mole-mole-hunt-whac-a-mole-jump-rope-many-times-think-number-geuss-your-number-motor-cycle-shooter-bullets-heading-game-video-game-thumbnail.png"
+            this.state.token.methods.mint(
+              this.state.account,
+                tokenURI
+              )
+              .send({ from: this.state.account })
+            alert('Congratulations! You\'ve earned a trophy which can be seen on the main page')
+        }
+    }
 
     render() {
         return (
             <div align="center">
                 <br/><br/>
-                <h2>Your score: <span id="score">0</span></h2>
-                <h2>Time Left: <span id="time-left">60</span></h2>
+                <h3>Reach a final score of 30 to win the game</h3>
+                <h4>Your score: <span id="score">0</span></h4>
+                <h4>Time Left: <span id="time-left">30</span></h4>
                 
                 <div className="whac-grid">
                     <div className="square" id="1"></div>

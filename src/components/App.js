@@ -16,10 +16,10 @@ class App extends React.Component {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/Memory" component={MemoryGame} />
                   <Route exact path="/Whacamole" component={Whacamole} />
-                  <Route exact path="/Snake" component={Whacamole} />
-                  <Route exact path="/Invaders" component={MemoryGame} />
-                  <Route exact path="/Frogger" component={MemoryGame} />
-                  <Route exact path="/Tetris" component={MemoryGame} />
+                  <Route exact path="/Snake" component={NotFound} />
+                  <Route exact path="/Invaders" component={NotFound} />
+                  <Route exact path="/Frogger" component={NotFound} />
+                  <Route exact path="/Tetris" component={NotFound} />
                   <Route component={NotFound} />
                 </Switch>
               </Layout>

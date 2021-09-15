@@ -20,7 +20,8 @@ export default class Home extends Component {
         return (
             <React.Fragment>
                 <br /><br />
-                <h3>Win each of these games once to get a NFT-based trophy. All games created by <a href="https://www.twitter.com/ania_kubow">@ania_kubow</a></h3>
+                <h3>Win each of these games once to get a NFT-based trophy which will be displayed in the main page.</h3>
+                <h4>All games were adapted from <a href="https://www.twitter.com/ania_kubow">@ania_kubow</a></h4>
                 <ol>
                     <li>
                         <Link to="/Memory">
@@ -32,9 +33,9 @@ export default class Home extends Component {
                             Whac-A-Mole
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to="/Snake">
-                            Snake
+                            Snake 
                         </Link>
                     </li>
                     <li>
@@ -51,16 +52,20 @@ export default class Home extends Component {
                         <Link to="/Tetris/">
                             Tetris
                         </Link>
-                    </li>
+                    </li> */}
                 </ol>
                 <h3>Total trophies earned: {this.state.tokenURIs.length}</h3>
 
                 { this.state.tokenURIs.map((tokenURI, key) => {
                       return(
-                        <img
-                          key={key}
-                          src={tokenURI}
-                        />
+                        <div>
+                            <img
+                            key={key}
+                            src={tokenURI}
+                            />
+                            <br />
+                            <br />
+                        </div>
                       )
                     })}
 
