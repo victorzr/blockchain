@@ -5,8 +5,9 @@ Small blockchain app that generates a token each time you win a game.
 Installing: 
 1. Download and run Ganache
 2. Install the Metamask browser extension
-   * 2.1. Connect Metamask to the Ganache network
-   * 2.2. Import one of the Ganache accounts into Metamask with its private key
+   * Connect Metamask to the Ganache network
+   * Import one of the Ganache accounts into Metamask with its private key
 3. Clone the repo
-4. Migrate the contracts (run "truffle migrate" from your CLI)
-5. Done!
+4. Run "truffle migrate" from your CLI to migrate the smart contracts
+5. Run "npm start" and connect your Metamask account
+6. Done!
